@@ -178,8 +178,8 @@
     $('execution-meta').textContent=` · versão ${registro.assinatura} · ${registro.data}`;
     $('execution-count').textContent=`${aprovados}/${resultados.length} aprovados`;
     body.innerHTML=resultados.map(r=>`<tr class="${r.aprovado?'':'row-fail'}">
-      <td>${r.id}<br><span class="tipo-badge tipo-${r.tipo}">${r.tipo==='reteste'?'Reteste':'Regressão'}</span></td>
-      <td><strong>${escapar(r.titulo)}</strong><br><span class="req-meta">${escapar(r.requisito)} · risco ${escapar(r.risco)}</span><br>${resumoCalculo(r)}</td>
+      <td><abbr title="Caso de Teste">${r.id}</abbr><br><span class="tipo-badge tipo-${r.tipo}">${r.tipo==='reteste'?'Reteste':'Regressão'}</span></td>
+      <td><strong>${escapar(r.titulo)}</strong><br><span class="req-meta"><abbr title="Regra de Negócio">${escapar(r.requisito)}</abbr> · risco ${escapar(r.risco)}</span><br>${resumoCalculo(r)}</td>
       <td class="nowrap">${dinheiro(r.preco)} × ${r.quantidade}</td>
       <td>${CAMPOS[r.campo]}</td>
       <td class="nowrap">${dinheiro(r.esperado)}</td>

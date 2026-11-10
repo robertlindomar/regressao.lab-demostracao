@@ -19,9 +19,10 @@
       <p class="lede">Você vai aplicar três versões reais do código de uma loja virtual, executar testes de verdade e produzir evidências de uma regressão. Nada é pré-programado: os testes avaliam a função que estiver ativa.</p>
     </div>
     <div class="tickets" aria-label="Regras de negócio">
-      <article class="ticket t-yellow"><span class="ticket-id">RN-01</span><strong>Desconto</strong><p>10% sobre o subtotal dos produtos.</p></article>
-      <article class="ticket t-blue"><span class="ticket-id">RN-02</span><strong>Frete</strong><p>R$ 20 abaixo de R$ 200. Grátis a partir de R$ 200 de subtotal, <u>antes do desconto</u>.</p></article>
-      <article class="ticket t-pink"><span class="ticket-id">RN-03</span><strong>Quantidade</strong><p>Subtotal = preço unitário × quantidade.</p></article>
+      <p class="legend-line"><abbr class="legend-key" title="Regra de Negócio">RN</abbr> = <b>Regra de Negócio</b> · o que o sistema precisa cumprir</p>
+      <article class="ticket t-yellow"><abbr class="ticket-id" title="Regra de Negócio">RN-01</abbr><strong>Desconto</strong><p>10% sobre o subtotal dos produtos.</p></article>
+      <article class="ticket t-blue"><abbr class="ticket-id" title="Regra de Negócio">RN-02</abbr><strong>Frete</strong><p>R$ 20 abaixo de R$ 200. Grátis a partir de R$ 200 de subtotal, <u>antes do desconto</u>.</p></article>
+      <article class="ticket t-pink"><abbr class="ticket-id" title="Regra de Negócio">RN-03</abbr><strong>Quantidade</strong><p>Subtotal = preço unitário × quantidade.</p></article>
     </div>
   </section>
 
@@ -72,7 +73,8 @@
 
   <section class="card tests-panel">
     <div class="card-title">
-      <div><h3><span class="num">02</span> Executar os testes</h3><p>Esperado vem dos requisitos. Obtido é calculado pelo código ativo.</p></div>
+      <div><h3><span class="num">02</span> Executar os testes</h3><p>Esperado vem das regras de negócio. Obtido é calculado pelo código ativo.</p>
+        <p class="legend-line"><abbr class="legend-key" title="Caso de Teste">CT</abbr> = <b>Caso de Teste</b> <span class="legend-sep">·</span> <abbr class="legend-key" title="Regra de Negócio">RN</abbr> = <b>Regra de Negócio</b></p></div>
       <div class="test-actions">
         <button id="run-retest" class="btn btn-outline" type="button">Reteste · CT-01</button>
         <button id="run-regression" class="btn btn-outline" type="button">Regressão · CT-02 a 06</button>
@@ -80,7 +82,7 @@
       </div>
     </div>
     <div class="execution-header"><span><span id="execution-label">Nenhum teste executado</span><span id="execution-meta" class="execution-meta"></span></span><span id="execution-count" class="count-badge">0 resultados</span></div>
-    <div class="table-wrap"><table><thead><tr><th>Caso</th><th>O que verifica</th><th>Entrada</th><th>Campo</th><th>Esperado</th><th>Obtido</th><th>Status</th></tr></thead><tbody id="results"><tr><td colspan="7" class="empty">Aplique o código e execute um teste.</td></tr></tbody></table></div>
+    <div class="table-wrap"><table><thead><tr><th>Caso de teste</th><th>O que verifica</th><th>Entrada</th><th>Campo</th><th>Esperado</th><th>Obtido</th><th>Status</th></tr></thead><tbody id="results"><tr><td colspan="7" class="empty">Aplique o código e execute um teste.</td></tr></tbody></table></div>
     <div id="detail" class="detail" hidden></div>
     <div id="verdict" class="verdict neutral" aria-live="polite"><span class="verdict-icon">i</span><div><strong>O resultado aparecerá aqui</strong><p>Um teste só é aprovado quando o valor calculado coincide com o esperado.</p></div></div>
   </section>
