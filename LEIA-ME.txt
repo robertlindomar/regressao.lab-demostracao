@@ -1,0 +1,29 @@
+DEMONSTRAÇÃO PRÁTICA — TESTE DE REGRESSÃO APÓS CORREÇÃO DE DEFEITO
+
+COMO ABRIR
+1) Extraia este ZIP.
+2) Abra index.html no Chrome, Edge ou Firefox. Não requer internet/instalação.3) Siga os três passos no menu lateral.
+
+O QUE O PROFESSOR DEVE VER (RESULTADOS VERIFICÁVEIS)
+REGRA: desconto 10%; frete R$20 abaixo de subtotal R$200; acima ou igual a R$200, grátis.
+PASSO 1: Clique Aplicar código > Executar TODOS. CT-01 deve FALHAR (desconto R$5 em vez de R$10) e CT-02 a CT-06 devem PASSAR.
+PASSO 2: Clique no passo 2 > Aplicar código > Executar RETESTE. CT-01 deve PASSAR.
+          Ainda no passo 2, clique Executar REGRESSÃO. CT-02 e CT-03 devem FALHAR (frete R$0 quando deveria ser R$20).
+          Observe que reteste e regressão usaram a mesma assinatura de código.
+PASSO 3: Clique no passo 3 > Aplicar código > Executar TODOS. Os seis testes devem PASSAR.
+FINAL: Clique Baixar relatório CSV para exportar evidências com esperado, obtido, execução e versão do código.
+
+PROVA EXTRA: EDITE O CÓDIGO
+Experimente mudar no editor 'subtotal >= 200' para 'subtotal >= 300', clique Aplicar código e Execute REGRESSÃO.
+O CT-04 vai FALHAR. Isso demonstra que os testes executam a função editada: os resultados não são slides nem respostas prontas.
+
+COMO EXPLICAR
+- RETESTE: conferir se o defeito específico do desconto foi corrigido (CT-01).
+- REGRESSÃO: conferir se a alteração preservou o frete e o subtotal (CT-02, CT-03, CT-04, CT-05 e CT-06).
+- CT-06: compra de R$ 210 vira R$ 189 após o desconto, mas o frete continua grátis porque o limite usa o subtotal ANTES do desconto.
+- ANÁLISE DE IMPACTO: ambos dependem do cálculo da compra. Por isso, frete e subtotal são selecionados para regressão.
+- RASTREABILIDADE: cada teste aponta o requisito RN-01, RN-02 ou RN-03.
+- EVIDÊNCIA: o CSV mostra o identificador do teste, esperado/obtido, status, data e assinatura da implementação.
+
+Importante: a alteração problemática do passo 2 é intencional, como simulação didática de uma correção com efeito colateral. A fonte do código pode ser editada manualmente.
+Opcional: testes do motor podem ser repetidos com `node --test testes.cjs` quando Node.js estiver instalado; o aplicativo não depende do Node.

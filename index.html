@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>regressão.lab — Teste de regressão na prática</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="wordmark" href="index.html" aria-label="regressão.lab, início"><span class="wordmark-box">QA</span>regressão<span class="wordmark-dot">.lab</span></a>  </div>
+</header>
+
+<main class="page">
+  <section class="hero">
+    <div class="hero-text">
+      <p class="kicker">// experimento ao vivo</p>
+      <h1>Corrigiu o bug.<br><mark>Quebrou o resto?</mark></h1>
+      <p class="lede">Você vai aplicar três versões reais do código de uma loja virtual, executar testes de verdade e produzir evidências de uma regressão. Nada é pré-programado: os testes avaliam a função que estiver ativa.</p>
+    </div>
+    <div class="tickets" aria-label="Regras de negócio">
+      <article class="ticket t-yellow"><span class="ticket-id">RN-01</span><strong>Desconto</strong><p>10% sobre o subtotal dos produtos.</p></article>
+      <article class="ticket t-blue"><span class="ticket-id">RN-02</span><strong>Frete</strong><p>R$ 20 abaixo de R$ 200. Grátis a partir de R$ 200 de subtotal, <u>antes do desconto</u>.</p></article>
+      <article class="ticket t-pink"><span class="ticket-id">RN-03</span><strong>Quantidade</strong><p>Subtotal = preço unitário × quantidade.</p></article>
+    </div>
+  </section>
+
+  <nav class="stepper" aria-label="Roteiro da demonstração">
+    <button class="stage active" data-stage="0" type="button"><span class="stage-number">1</span><span><strong>Reproduzir o defeito</strong><small>Desconto errado; o resto funciona</small></span></button>
+    <button class="stage" data-stage="1" type="button"><span class="stage-number">2</span><span><strong>Corrigir e testar</strong><small>Reteste passa, regressão falha</small></span></button>
+    <button class="stage" data-stage="2" type="button"><span class="stage-number">3</span><span><strong>Corrigir a regressão</strong><small>Suíte completa aprovada</small></span></button>
+  </nav>
+
+  <div class="board">
+    <section class="card instructions">
+      <div class="card-head"><span class="step-pill" id="step-pill">PASSO 1 DE 3</span><span class="stage-type" id="stage-type">DEFEITO</span></div>
+      <h2 id="stage-title">Prove que existe um defeito</h2>
+      <p id="stage-description" class="stage-description">O sistema dá somente 5% de desconto, mas o requisito exige 10%.</p>
+      <ol class="mini-steps"><li>Confira o código</li><li>Aplique a versão</li><li>Execute os testes</li></ol>
+      <div class="stage-insight" id="stage-insight"></div>
+      <div class="cheat">
+        <p><b class="tag tag-reteste">Reteste</b> verifica se o defeito corrigido sumiu (CT-01).</p>
+        <p><b class="tag tag-regressao">Regressão</b> verifica se o que já funcionava continua funcionando (CT-02 a CT-06).</p>
+      </div>
+    </section>
+
+    <section class="card code-panel">
+      <div class="card-title">
+        <div><h3><span class="num">01</span> Código da aplicação</h3><p>Editável. É exatamente este código que os testes executam.</p></div>
+        <button id="reset-code" type="button" class="btn btn-ghost">Restaurar exemplo</button>
+      </div>
+      <div class="editor-shell">
+        <div class="editor-toolbar"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span><code>loja.js</code><span id="code-status" class="status-tag status-unapplied">Alterações não aplicadas</span></div>
+        <div class="editor-frame">
+          <pre id="gutter" class="editor-gutter" aria-hidden="true"></pre>
+          <div class="editor-area">
+            <div id="editor-marks" class="editor-marks" aria-hidden="true"></div>
+            <pre id="editor-highlight" class="editor-highlight" aria-hidden="true"></pre>
+            <textarea id="editor" wrap="off" spellcheck="false" aria-label="Editor de código JavaScript"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="diff-legend" aria-label="Legenda dos destaques do código"><span><i class="legend-erro"></i>Defeito</span><span><i class="legend-ok"></i>Corrigido</span><span><i class="legend-edit"></i>Editado por você</span></div>
+      <div id="edit-hint" class="edit-hint"></div>
+      <div class="actions">
+        <button id="apply" class="btn btn-primary" type="button">Aplicar código à aplicação</button>
+        <span id="active-version" class="applied-info">Nenhuma versão ativa</span>
+      </div>
+      <div id="app-message" role="status" aria-live="polite"></div>
+    </section>
+  </div>
+
+  <section class="card tests-panel">
+    <div class="card-title">
+      <div><h3><span class="num">02</span> Executar os testes</h3><p>Esperado vem dos requisitos. Obtido é calculado pelo código ativo.</p></div>
+      <div class="test-actions">
+        <button id="run-retest" class="btn btn-outline" type="button">Reteste · CT-01</button>
+        <button id="run-regression" class="btn btn-outline" type="button">Regressão · CT-02 a 06</button>
+        <button id="run-all" class="btn btn-dark" type="button">Todos · 6 testes</button>
+      </div>
+    </div>
+    <div class="execution-header"><span><span id="execution-label">Nenhum teste executado</span><span id="execution-meta" class="execution-meta"></span></span><span id="execution-count" class="count-badge">0 resultados</span></div>
+    <div class="table-wrap"><table><thead><tr><th>Caso</th><th>O que verifica</th><th>Entrada</th><th>Campo</th><th>Esperado</th><th>Obtido</th><th>Status</th></tr></thead><tbody id="results"><tr><td colspan="7" class="empty">Aplique o código e execute um teste.</td></tr></tbody></table></div>
+    <div id="detail" class="detail" hidden></div>
+    <div id="verdict" class="verdict neutral" aria-live="polite"><span class="verdict-icon">i</span><div><strong>O resultado aparecerá aqui</strong><p>Um teste só é aprovado quando o valor calculado coincide com o esperado.</p></div></div>
+  </section>
+
+  <section class="card evidence-panel">
+    <div class="card-title">
+      <div><h3><span class="num">03</span> Evidências</h3><p>Cada execução fica registrada com a assinatura do código testado.</p></div>
+      <button id="download" class="btn btn-outline" type="button" disabled>Baixar relatório CSV</button>
+    </div>
+    <div id="history" class="history-empty">Sem execuções registradas. Comece pelo passo 1.</div>
+  </section>
+
+  <footer>regressão.lab · projeto didático local · o JavaScript roda no seu navegador · não cole código de fontes desconhecidas no editor.</footer>
+</main>
+
+<aside id="next-action" class="next-action" role="status" aria-live="polite">
+  <span class="next-action-label">PRÓXIMA AÇÃO</span>
+  <p id="next-action-text"></p>
+  <button id="next-stage" class="btn btn-primary" type="button" hidden></button>
+</aside>
+
+<script src="engine.js"></script><script src="app.js"></script>
+</body>
+</html>
